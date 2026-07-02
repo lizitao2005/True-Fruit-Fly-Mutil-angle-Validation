@@ -55,7 +55,7 @@ python train.py \
 
 > `--image_dir .` 表示图像路径相对 `data_dir` 根目录；若图像在 `data/images/` 下则改为 `--image_dir images`。
 
-可选模型：`resnet18` `resnet50` `efficientnet` `mobilenet` `swin_tiny` `vit` `vit_small` `convnext` `inception` `maxvit`
+可选模型：`ResNet-18` `ResNet-50` `EfficientNet-B0` `MobileNet-v2` `Swin-Tiny` `ViT-Small` `ConvNeXt-B` `Inception-v3` `MaxViT-Tiny`
 
 ## 指定 test 集预测
 
