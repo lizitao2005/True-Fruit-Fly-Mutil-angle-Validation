@@ -1,16 +1,16 @@
 # True Fruit Fly Multi-angle Validation
 
-实蝇多视角图像分类训练与测试脚本。
+Training and testing scripts for multi-view fruit fly image classification.
 
-## 安装
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-PyTorch 需按 [pytorch.org](https://pytorch.org) 选择对应 CUDA 版本安装。
+Install PyTorch from [pytorch.org](https://pytorch.org) with the CUDA version that matches your system.
 
-## 数据格式
+## Data Format
 
 ```
 data/
@@ -21,7 +21,7 @@ data/
     └── ...
 ```
 
-CSV 示例（`dataset1_1.csv`）：
+CSV example (`dataset1_1.csv`):
 
 ```csv
 image_path,label,specimen,split
@@ -30,16 +30,19 @@ Dataset1/1001002_dataset1_L.jpg,1001,1001002,train
 Dataset1/1001019_dataset1_D.jpg,1001,1001019,val
 ```
 
-| 列名 | 说明 |
-|------|------|
-| `image_path` | 相对图像根目录的路径 |
-| `label` | 物种编号（如 1001、1003） |
-| `specimen` | 标本编号（训练脚本未使用，可保留） |
+| Column | Description |
+|--------|-------------|
+| `image_path` | Path to the image relative to the image root directory |
+| `label` | Species ID (e.g., 1001, 1003) |
+| `specimen` | Specimen ID (not used by the training script; may be kept) |
 | `split` | `train` / `val` / `test` |
 
-Dataset1中文件名后缀 `_D` / `_L` 表示不同拍摄角度（背视 / 侧视）。
+Specimen IDs are independent across Dataset 1, 2, and 3. For example, `Dataset1_1001001` and `Dataset2_1001001` refer to different specimens.
 
-## 训练
+In Dataset1, the filename suffixes `_D` / `_L` indicate different viewing angles (dorsal / lateral).
+
+
+## Training
 
 ```bash
 python train.py \
@@ -53,13 +56,13 @@ python train.py \
   --output_dir ./outputs
 ```
 
-> `--image_dir .` 表示图像路径相对 `data_dir` 根目录；若图像在 `data/images/` 下则改为 `--image_dir images`。
+> `--image_dir .` means image paths are relative to the `data_dir` root. If images are under `data/images/`, use `--image_dir images` instead.
 
-可选模型：`ResNet-18` `ResNet-50` `EfficientNet-B0` `MobileNet-v2` `Swin-Tiny` `ViT-Small` `ConvNeXt-B` `Inception-v3` `MaxViT-Tiny`
+Supported models: `ResNet-18` `ResNet-50` `EfficientNet-B0` `MobileNet-v2` `Swin-Tiny` `ViT-Small` `ConvNeXt-B` `Inception-v3` `MaxViT-Tiny`
 
-## 指定 test 集预测
+## Test Set Prediction
 
-**方式 1：CSV 中增加 `split=test` 行**
+**Option 1: Add rows with `split=test` in the CSV**
 
 ```bash
 python train.py \
